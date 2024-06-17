@@ -1,4 +1,4 @@
-# 🥊 BoxingWithML
+# BoxingWithML
 Detection of fist movements with Mediapipe for boxing game. 
 
 
