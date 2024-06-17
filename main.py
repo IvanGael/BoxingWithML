@@ -14,7 +14,7 @@ rightHand_positions = [np.array([0, 0]), np.array([0, 0])]
 damping_factory = 0.15
 
 key = KeyboardController()
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("video.mp4")
 
 overlay_box_size = 200  # Size of the overlay box
 
@@ -42,6 +42,12 @@ def is_fist(hand_landmarks):
 
 while cap.isOpened():
     success, img = cap.read()
+
+    if not success:
+        # Restart the video
+        cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+        continue
+
     img = cv2.flip(img, 2)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -153,6 +159,8 @@ while cap.isOpened():
 
         hands_area[0] = []
         hands_area[1] = []
+    
+    cv2.namedWindow('Screen', cv2.WINDOW_NORMAL)
 
     cv2.imshow("Screen", img)
 
