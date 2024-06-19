@@ -14,7 +14,7 @@ rightHand_positions = [np.array([0, 0]), np.array([0, 0])]
 damping_factory = 0.15
 
 key = KeyboardController()
-cap = cv2.VideoCapture("video.mp4")  # Use 0 for the webcam, or "video.mp4" for a video file
+cap = cv2.VideoCapture(0)  # Use 0 for the webcam, or "video.mp4" for a video file
 
 overlay_box_size = 200  # Size of the overlay box
 
@@ -33,9 +33,9 @@ def get_handedness(hand_landmarks):
 
     # If the wrist is to the left of the center, it's a right hand
     if wrist_x < center_x:
-        return "Left"
-    else:
         return "Right"
+    else:
+        return "Left"
 
 def is_fist(hand_landmarks):
     # Check if the thumb is close to the palm
