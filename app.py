@@ -6,6 +6,7 @@ import numpy as np
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
+mp_drawing = mp.solutions.drawing_utils
 hands_area = [[], []]
 counter = 0
 
@@ -14,7 +15,7 @@ rightHand_positions = [np.array([0, 0]), np.array([0, 0])]
 damping_factory = 0.15
 
 key = KeyboardController()
-cap = cv2.VideoCapture(0)  # Use 0 for the webcam, or "video.mp4" for a video file
+cap = cv2.VideoCapture("video.mp4")  # Use 0 for the webcam, or "video.mp4" for a video file
 
 overlay_box_size = 200  # Size of the overlay box
 
@@ -137,6 +138,9 @@ while cap.isOpened():
 
             hand_positions[0] = current_top_left_point_hand
             hand_positions[1] = current_bottom_right_point_hand
+
+            # Draw landmarks on the image
+            mp_drawing.draw_landmarks(img, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
             if is_fist(hand_landmarks):
                 fist_detected = True
